@@ -19,15 +19,16 @@ public class MainActivity extends AppCompatActivity {
 
         CustomDialogLongPress customDialogLongPress = new CustomDialogLongPress(this);
 
+        // Code to display custom dialog when the user long presses the image view
         ImageView imageView = findViewById(R.id.imageView);
         imageView.setOnLongClickListener(v -> {
             customDialogLongPress.show();
             return false;
         });
 
+        // Add code to watch for when the user releases the touch event
         imageView.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_UP) {
-//                Toast.makeText(this, "Released", Toast.LENGTH_SHORT).show();
                 customDialogLongPress.dismiss();
             }
             return false;
