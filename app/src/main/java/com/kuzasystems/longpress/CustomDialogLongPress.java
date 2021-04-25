@@ -6,12 +6,20 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
+
 import androidx.annotation.NonNull;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 
 public class CustomDialogLongPress extends Dialog {
-    public CustomDialogLongPress(@NonNull Context context) {
+    String imageUrl;
+
+    public CustomDialogLongPress(@NonNull Context context, String imageUrl) {
         super(context);
+        this.imageUrl = imageUrl;
     }
 
     @Override
@@ -30,6 +38,16 @@ public class CustomDialogLongPress extends Dialog {
 
         getWindow().setAttributes(lp);
 
-        // Initialize views
+        ImageView imageView = findViewById(R.id.imageView2);
+        RequestOptions requestOptions = new RequestOptions()
+                .centerCrop()
+                .placeholder(R.drawable.ic_launcher_foreground)
+                .error(R.drawable.ic_launcher_foreground);
+
+        Glide.with(getContext())
+                .load(imageUrl)
+                .apply(requestOptions)
+                .fitCenter()
+                .into(imageView);
     }
 }
